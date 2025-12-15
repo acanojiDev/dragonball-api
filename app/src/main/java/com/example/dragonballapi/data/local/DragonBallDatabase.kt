@@ -9,7 +9,8 @@ import com.example.dragonballapi.data.local.planeta.PlanetaEntity
 
 @Database(
     entities = [PersonajeEntity::class, PlanetaEntity::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class DragonBallDatabase: RoomDatabase(){
     abstract fun getPersonajeDao(): PersonajeDao

@@ -12,10 +12,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class PersonajeListUiState(
-    val isLoading: Boolean = true,      // ¿Está cargando?
-    val personajeList: List<Personaje> = emptyList(),  // Los datos
-    val isSyncing: Boolean = false,     // ¿Sincronizando?
-    val syncError: String? = null       // ¿Error de sync?
+    val isLoading: Boolean = true,
+    val personajeList: List<Personaje> = emptyList(),
+    val isSyncing: Boolean = false,
+    val syncError: String? = null
 )
 
 @HiltViewModel
@@ -27,23 +27,36 @@ class PersonajeListViewModel @Inject constructor(
     val uiState: StateFlow<PersonajeListUiState> = _uiState.asStateFlow()
 
     init {
-        loadFromLocal()     // 1. Cargar de BD
-        syncWithNetwork()   // 2. Sincronizar en background
+        loadFromLocal()
+        syncWithNetwork()
     }
 
     private fun loadFromLocal() {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true)
 
-            repository.observeAllPersonaje()
-                .collect { result ->
-                    result.onSuccess { personajeList ->
-                        _uiState.value = _uiState.value.copy(
-                            isLoading = false,
-                            personajeList = personajeList  // UI se redibuja
-                        )
+            try {
+                repository.observeAllPersonaje()
+                    .collect { result ->
+                        result.onSuccess { personajeList ->
+                            _uiState.value = _uiState.value.copy(
+                                isLoading = false,
+                                personajeList = personajeList
+                            )
+                        }
+                        result.onFailure { error ->
+                            _uiState.value = _uiState.value.copy(
+                                isLoading = false,
+                                syncError = error.message ?: "Error desconocido"
+                            )
+                        }
                     }
-                }
+            } catch (e: Exception) {
+                _uiState.value = _uiState.value.copy(
+                    isLoading = false,
+                    syncError = e.message ?: "Error desconocido"
+                )
+            }
         }
     }
 
@@ -57,7 +70,7 @@ class PersonajeListViewModel @Inject constructor(
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(
                     isSyncing = false,
-                    syncError = "Error"
+                    syncError = e.message ?: "Error al sincronizar"
                 )
             }
         }

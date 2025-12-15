@@ -13,6 +13,6 @@ interface PersonajeRepository{
     suspend fun readOne(id: Long): Result<Personaje>
     // ↑ Lee uno específico
 
-    suspend fun addPersonaje(pokemon: Personaje)
+    suspend fun addPersonaje(personaje: Personaje)
     // ↑ Agrega uno
 }

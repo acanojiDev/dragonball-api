@@ -5,6 +5,7 @@ data class PlanetaListRemote(
 )
 
 data class PlanetaListItemRemote(
+    val id:Long,
     val name: String,
     val isDestroyed: Boolean,
     val description: String,

@@ -14,6 +14,6 @@ interface PersonajeApi{
         @Query("offset") offset: Int = 0
     ): Response<PersonajeListRemote>
 
-    @GET("character{id}")
+    @GET("character/{id}")
     suspend fun getPersonajeDetail(@Path("id") id:Long): Response<PersonajeRemote>
 }

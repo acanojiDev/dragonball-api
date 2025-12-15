@@ -14,6 +14,6 @@ interface PlanetaApi{
         @Query("offset") offset: Int = 0
     ): Response<PlanetaListRemote>
 
-    @GET("planets{id}")
+    @GET("planets/{id}")
     suspend fun getPlanetaDetail(@Path("id") id:Long): Response<PlanetaRemote>
 }

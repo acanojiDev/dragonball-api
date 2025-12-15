@@ -7,8 +7,10 @@ import com.example.dragonballapi.data.local.planeta.PlanetaLocalDataSource
 
 import com.example.dragonballapi.data.remote.personaje.PersonajeRemoteDataSource
 import com.example.dragonballapi.data.remote.planeta.PlanetaRemoteDataSource
-import com.example.dragonballapi.data.repository.planeta.PersonajeRepository
+import com.example.dragonballapi.data.repository.personaje.PersonajeRepository
+import com.example.dragonballapi.data.repository.personaje.PersonajeRepositoryImpl
 import com.example.dragonballapi.data.repository.planeta.PlanetaRepository
+import com.example.dragonballapi.data.repository.planeta.PlanetaRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -31,19 +33,19 @@ abstract class AppModule {
 
     @Binds
     @Singleton
-    abstract fun bindPokemonRepository(repository: PersonajeRepositoryImpl): PersonajeRepository
+    abstract fun bindPersonajeRepository(repository: PersonajeRepositoryImpl): PersonajeRepository
     //abstract fun bindPokemonRepository(repository: PokemonFakeRemoteRepository): PokemonRepository
     //abstract fun bindPokemonRepository(repository: PokemonInMemoryRepository): PokemonRepository
 
     @Singleton
     @Binds
     @RemoteDataSource
-    abstract fun bindsRemotePlanetaRemoteDataSource(ds: PlanetaRemoteDataSource): PlanetaDataSource
+    abstract fun bindRemotePlanetaRemoteDataSource(ds: PlanetaRemoteDataSource): PlanetaDataSource
 
     @Singleton
     @Binds
     @LocalDataSource
-    abstract fun bindsLocalPlanetaRemoteDataSource(ds: PlanetaLocalDataSource): PlanetaDataSource
+    abstract fun bindLocalPlanetaRemoteDataSource(ds: PlanetaLocalDataSource): PlanetaDataSource
 
     @Binds
     @Singleton

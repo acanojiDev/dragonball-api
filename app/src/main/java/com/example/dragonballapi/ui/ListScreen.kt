@@ -43,7 +43,7 @@ fun PersonajeListScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Pokédex") },
+                title = { Text("Dragon Ball - Personajes") },
                 actions = {
                     if (uiState.isSyncing) {
                         CircularProgressIndicator(
@@ -76,7 +76,7 @@ fun PersonajeListScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = uiState.syncError!!,
+                            text = "Error: ${uiState.syncError}",
                             color = MaterialTheme.colorScheme.error
                         )
                     }
@@ -132,7 +132,6 @@ private fun PersonajeCard(personaje: Personaje) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // ✅ NUEVA: Imagen con Coil
             AsyncImage(
                 model = personaje.image,
                 contentDescription = personaje.name,
@@ -145,13 +144,19 @@ private fun PersonajeCard(personaje: Personaje) {
                 contentScale = ContentScale.Crop
             )
 
-            Column {
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
                 Text(
                     personaje.name.replaceFirstChar { it.uppercase() },
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
                     "ID: ${personaje.id}",
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Text(
+                    "Raza: ${personaje.race}",
                     style = MaterialTheme.typography.bodySmall
                 )
             }

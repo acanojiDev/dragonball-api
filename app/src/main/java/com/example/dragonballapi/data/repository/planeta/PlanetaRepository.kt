@@ -13,6 +13,6 @@ interface PlanetaRepository{
     suspend fun readOne(id: Long): Result<Planeta>
     // ↑ Lee uno específico
 
-    suspend fun addPlaneta(pokemon: Planeta)
+    suspend fun addPlaneta(planeta: Planeta)
     // ↑ Agrega uno
 }
