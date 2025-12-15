@@ -16,6 +16,7 @@ interface PersonajeDataSource {
     suspend fun readOne(id: Long): Result<Personaje>
     // ↑ Todos deben poder leer uno específico
 
+
     suspend fun isError()
     // ↑ Todos deben poder reportar errores
 }

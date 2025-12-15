@@ -59,4 +59,8 @@ class PlanetaLocalDataSource @Inject constructor(
         planetaDao.insert(planetaList.toEntity())
     }
 
+    suspend fun deleteById(id:Long){
+        planetaDao.deleteById(id)
+    }
+
 }

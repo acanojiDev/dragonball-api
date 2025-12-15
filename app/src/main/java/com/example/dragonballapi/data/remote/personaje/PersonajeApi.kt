@@ -16,4 +16,12 @@ interface PersonajeApi{
 
     @GET("/api/characters/{id}")
     suspend fun getPersonajeDetail(@Path("id") id:Long): Response<PersonajeRemote>
+
+
+    //Solo inicializadas hace falta implementar
+    @GET("/api/characters")
+    suspend fun readOneByName(@Query("name") name:String): Response<PersonajeRemote>
+
+    @GET("/api/characters")
+    suspend fun readPage(@Query("page") page: Int): Response<PersonajeRemote>
 }

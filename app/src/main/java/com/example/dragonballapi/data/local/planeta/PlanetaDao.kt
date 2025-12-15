@@ -31,4 +31,7 @@ interface PlanetaDao {
 
     @Query("DELETE FROM planeta")
     suspend fun deleteAll()
+
+    @Query("DELETE FROM planeta WHERE id = :id")
+    suspend fun deleteById(id:Long)
 }

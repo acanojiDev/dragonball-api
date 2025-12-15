@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.shareIn
 import javax.inject.Inject
 import kotlin.Long
-import kotlin.String
 
 
 class  PersonajeRemoteDataSource @Inject constructor(
@@ -41,7 +40,7 @@ class  PersonajeRemoteDataSource @Inject constructor(
                 if (body != null) {
                     val personajeList = mutableListOf<Personaje>()
 
-                    for (item in body.results) {
+                    for (item in body.items) {  // ✅ Cambiar de "results" a "items"
                         val detailResponse = personajeApi.getPersonajeDetail(item.id)
                         if (detailResponse.isSuccessful) {
                             val detail = detailResponse.body()
@@ -104,5 +103,10 @@ class  PersonajeRemoteDataSource @Inject constructor(
         TODO("Not yet implemented")
     }
 
-
+//    private suspend fun readOneByName(name:String): Personaje?{
+//        val response = personajeApi.readOneByName(name)
+//        return response.body()?.let { personajeList ->
+//            personajeList.firstOrNull()?
+//        }
+//    }
 }

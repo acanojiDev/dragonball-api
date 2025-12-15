@@ -34,4 +34,12 @@ class PlanetaRepositoryImpl @Inject constructor(
         localDataSource.addAll(listOf(planeta))
     }
 
+    override suspend fun updatePlaneta(planeta:Planeta){
+        localDataSource.addAll(listOf(planeta))
+    }
+
+    override suspend fun deletePlaneta(id:Long){
+        localDataSource.deleteById(id)
+    }
+
 }

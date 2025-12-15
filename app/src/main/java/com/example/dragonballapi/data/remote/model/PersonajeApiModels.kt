@@ -1,7 +1,7 @@
 package com.example.dragonballapi.data.remote.model
 
 data class PersonajeListRemote(
-    val results: List<PersonajeListItemRemote>
+    val items: List<PersonajeListItemRemote>
 )
 
 data class PersonajeListItemRemote(

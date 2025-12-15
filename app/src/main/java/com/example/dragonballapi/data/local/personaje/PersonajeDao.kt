@@ -30,4 +30,7 @@ interface PersonajeDao {
 
     @Query("DELETE FROM personaje")
     suspend fun deleteAll()
+
+    @Query("DELETE FROM personaje WHERE id = :id")
+    suspend fun deleteById(id: Long)
 }

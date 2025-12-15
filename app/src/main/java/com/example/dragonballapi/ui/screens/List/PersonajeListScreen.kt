@@ -1,4 +1,4 @@
-package com.example.dragonballapi.ui.screens
+package com.example.dragonballapi.ui.screens.List
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -13,10 +13,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
@@ -29,7 +31,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 import com.example.dragonballapi.data.model.Personaje
 
@@ -37,6 +41,7 @@ import com.example.dragonballapi.data.model.Personaje
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PersonajeListScreen(
+    navController: NavHostController,
     viewModel: PersonajeListViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -45,15 +50,14 @@ fun PersonajeListScreen(
         topBar = {
             TopAppBar(
                 title = { Text("Dragon Ball - Personajes") },
-                actions = {
-                    if (uiState.isSyncing) {
-                        CircularProgressIndicator(
-                            modifier = Modifier.size(24.dp),
-                            strokeWidth = 2.dp
-                        )
-                    }
-                }
             )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { navController.navigate("crear_personaje") }
+            ) {
+                Text("+", fontSize = 24.sp)
+            }
         }
     ) { padding ->
         Box(
@@ -90,7 +94,7 @@ fun PersonajeListScreen(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         items(uiState.personajeList) { personaje ->
-                            PersonajeCard(personaje)
+                            PersonajeCard(personaje, navController)
                         }
                     }
                 }
@@ -119,7 +123,7 @@ fun PersonajeListScreen(
 }
 
 @Composable
-private fun PersonajeCard(personaje: Personaje) {
+private fun PersonajeCard(personaje: Personaje, navController: NavHostController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -133,7 +137,6 @@ private fun PersonajeCard(personaje: Personaje) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // ✅ Imagen con Coil
             AsyncImage(
                 model = personaje.image,
                 contentDescription = personaje.name,
@@ -165,6 +168,23 @@ private fun PersonajeCard(personaje: Personaje) {
                     "Ki: ${personaje.ki}",
                     style = MaterialTheme.typography.bodySmall
                 )
+            }
+
+            Column(
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Button(
+                    onClick = { navController.navigate("editar_personaje/${personaje.id}") },
+                    modifier = Modifier.size(width = 70.dp, height = 32.dp)
+                ) {
+                    Text("Editar", fontSize = 10.sp)
+                }
+                Button(
+                    onClick = { navController.navigate("detalle_personaje/${personaje.id}") },
+                    modifier = Modifier.size(width = 70.dp, height = 32.dp)
+                ) {
+                    Text("Ver", fontSize = 10.sp)
+                }
             }
         }
     }

@@ -15,4 +15,8 @@ interface PersonajeRepository{
 
     suspend fun addPersonaje(personaje: Personaje)
     // ↑ Agrega uno
+
+    suspend fun updatePersonaje(personaje: Personaje)
+
+    suspend fun deletePersonaje(id:Long)
 }

@@ -15,4 +15,8 @@ interface PlanetaRepository{
 
     suspend fun addPlaneta(planeta: Planeta)
     // ↑ Agrega uno
+
+    suspend fun updatePlaneta(planeta: Planeta)
+
+    suspend fun deletePlaneta(id:Long)
 }

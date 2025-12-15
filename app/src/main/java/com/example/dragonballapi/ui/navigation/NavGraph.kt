@@ -4,16 +4,27 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.dragonballapi.ui.screens.PersonajeListScreen
+import com.example.dragonballapi.ui.screens.Home.HomeScreen
+import com.example.dragonballapi.ui.screens.List.PersonajeListScreen
+import com.example.dragonballapi.ui.screens.List.PlanetaListScreen
 
 @Composable
 fun NavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = "personajes_list"  // Primera pantalla
-    ) {
-        composable("personajes_list") {  // Ruta
-            PersonajeListScreen()        // ¿Qué mostrar?
+        startDestination = "home"
+    ){
+        composable("home") {
+            HomeScreen(navController)
         }
+
+        composable("personajes_list") {
+            PersonajeListScreen(navController)
+        }
+
+        composable("planetas_list") {
+            PlanetaListScreen(navController)
+        }
+
     }
 }

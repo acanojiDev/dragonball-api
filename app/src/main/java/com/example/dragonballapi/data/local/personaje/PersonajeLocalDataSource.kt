@@ -59,4 +59,8 @@ class PersonajeLocalDataSource @Inject constructor(
         personajeDao.deleteAll()
         personajeDao.insert(personajeList.toEntity())
     }
+
+    suspend fun deleteById(id:Long){
+        personajeDao.deleteById(id)
+    }
 }

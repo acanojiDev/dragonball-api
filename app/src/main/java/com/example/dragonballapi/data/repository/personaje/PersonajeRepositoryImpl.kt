@@ -31,4 +31,12 @@ class PersonajeRepositoryImpl @Inject constructor(
     override suspend fun addPersonaje(personaje: Personaje) {
         localDataSource.addAll(listOf(personaje))
     }
+
+    override suspend fun updatePersonaje(personaje: Personaje){
+        localDataSource.addAll(listOf(personaje))
+    }
+
+    override suspend fun deletePersonaje(id: Long) {
+        localDataSource.deleteById(id)
+    }
 }

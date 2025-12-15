@@ -42,6 +42,10 @@ android {
 }
 
 dependencies {
+    //icons
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.material3)
+
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.compose.material3)

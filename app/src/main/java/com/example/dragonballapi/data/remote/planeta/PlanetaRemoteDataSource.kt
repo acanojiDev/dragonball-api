@@ -1,16 +1,13 @@
 package com.example.dragonballapi.data.remote.planeta
 
 import com.example.dragonballapi.data.PlanetaDataSource
-import com.example.dragonballapi.data.model.Personaje
 import com.example.dragonballapi.data.model.Planeta
-import com.example.dragonballapi.data.remote.personaje.PersonajeApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.shareIn
 import javax.inject.Inject
-import kotlin.String
 
 class  PlanetaRemoteDataSource @Inject constructor(
     private val planetaApi: PlanetaApi,
@@ -41,7 +38,7 @@ class  PlanetaRemoteDataSource @Inject constructor(
                 if (body != null) {
                     val planetaList = mutableListOf<Planeta>()
 
-                    for (item in body.results) {
+                    for (item in body.items) {  // ✅ Cambiar de "results" a "items"
                         val detailResponse = planetaApi.getPlanetaDetail(item.id)
                         if (detailResponse.isSuccessful) {
                             val detail = detailResponse.body()
