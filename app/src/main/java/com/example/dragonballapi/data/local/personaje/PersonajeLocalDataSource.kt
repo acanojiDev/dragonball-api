@@ -3,6 +3,7 @@ package com.example.dragonballapi.data.local.personaje
 import com.example.dragonballapi.data.PersonajeDataSource
 import com.example.dragonballapi.data.model.Personaje
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -22,6 +23,9 @@ class PersonajeLocalDataSource @Inject constructor(
                 }catch (e: Exception){
                     Result.failure(e)
                 }
+            }
+            .catch { error ->
+                emit(Result.failure(error))
             }
     }
 

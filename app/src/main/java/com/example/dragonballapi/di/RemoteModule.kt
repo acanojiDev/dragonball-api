@@ -20,7 +20,7 @@ class RemoteModule {
     @Singleton
     fun provideDragonBall(): Retrofit {
         return  Retrofit.Builder()
-            .baseUrl("https://www.dragonball-api.com/api/")
+            .baseUrl("https://dragonball-api.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

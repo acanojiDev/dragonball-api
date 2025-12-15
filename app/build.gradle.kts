@@ -44,6 +44,7 @@ android {
 dependencies {
     // Room
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.compose.material3)
 
     // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
     // See Add the KSP plugin to your project

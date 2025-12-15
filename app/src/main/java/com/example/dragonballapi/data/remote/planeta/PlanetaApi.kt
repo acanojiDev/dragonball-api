@@ -8,12 +8,12 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface PlanetaApi{
-    @GET("planets")
+    @GET("/api/planets")
     suspend fun getPlanetaList(
         @Query("limit") limit: Int = 20,
         @Query("offset") offset: Int = 0
     ): Response<PlanetaListRemote>
 
-    @GET("planets/{id}")
+    @GET("/api/planets/{id}")
     suspend fun getPlanetaDetail(@Path("id") id:Long): Response<PlanetaRemote>
 }

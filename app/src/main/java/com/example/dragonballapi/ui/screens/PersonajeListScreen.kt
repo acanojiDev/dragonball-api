@@ -1,3 +1,5 @@
+package com.example.dragonballapi.ui.screens
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import coil3.compose.AsyncImage
 import com.example.dragonballapi.data.model.Personaje
-import com.example.dragonballapi.ui.PersonajeListViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -76,7 +77,7 @@ fun PersonajeListScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "Error: ${uiState.syncError}",
+                            text = uiState.syncError!!,
                             color = MaterialTheme.colorScheme.error
                         )
                     }
@@ -132,6 +133,7 @@ private fun PersonajeCard(personaje: Personaje) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+            // ✅ Imagen con Coil
             AsyncImage(
                 model = personaje.image,
                 contentDescription = personaje.name,
@@ -157,6 +159,10 @@ private fun PersonajeCard(personaje: Personaje) {
                 )
                 Text(
                     "Raza: ${personaje.race}",
+                    style = MaterialTheme.typography.bodySmall
+                )
+                Text(
+                    "Ki: ${personaje.ki}",
                     style = MaterialTheme.typography.bodySmall
                 )
             }

@@ -3,6 +3,7 @@ package com.example.dragonballapi.data.local.planeta
 import com.example.dragonballapi.data.PlanetaDataSource
 import com.example.dragonballapi.data.model.Planeta
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -21,6 +22,9 @@ class PlanetaLocalDataSource @Inject constructor(
                 }catch (e: Exception){
                     Result.failure(e)
                 }
+            }
+            .catch { error ->
+                emit(Result.failure(error))
             }
     }
 

@@ -8,12 +8,12 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface PersonajeApi{
-    @GET("characters")
+    @GET("/api/characters")
     suspend fun getPersonajeList(
         @Query("limit") limit: Int = 20,
         @Query("offset") offset: Int = 0
     ): Response<PersonajeListRemote>
 
-    @GET("character/{id}")
+    @GET("/api/characters/{id}")
     suspend fun getPersonajeDetail(@Path("id") id:Long): Response<PersonajeRemote>
 }
